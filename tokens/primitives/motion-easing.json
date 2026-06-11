@@ -1,0 +1,22 @@
+{
+  "$description": "Easing curves and CSS transitions. CSS-ONLY — Figma has no Variable type for cubicBezier or transition composites. All tokens carry $figmaExclude:true. At CSS generation these become cubic-bezier() and transition shorthand strings.",
+  "motion": {
+    "easing": {
+      "standard": { "$value": [0.2, 0, 0, 1],   "$type": "cubicBezier", "$figmaExclude": true, "$description": "Standard easing — most UI transitions" },
+      "enter":    { "$value": [0, 0, 0.2, 1],    "$type": "cubicBezier", "$figmaExclude": true, "$description": "Decelerate — entering elements" },
+      "exit":     { "$value": [0.4, 0, 1, 1],    "$type": "cubicBezier", "$figmaExclude": true, "$description": "Accelerate — exiting elements" },
+      "linear":   { "$value": [0, 0, 1, 1],      "$type": "cubicBezier", "$figmaExclude": true, "$description": "Linear — no easing" }
+    },
+    "transition": {
+      "standard": {
+        "$type": "transition", "$figmaExclude": true,
+        "$description": "Default UI transition — composites duration + easing",
+        "$value": { "duration": "{motion.duration.base}", "delay": { "value": 0, "unit": "ms" }, "timingFunction": "{motion.easing.standard}" }
+      },
+      "enter": {
+        "$type": "transition", "$figmaExclude": true,
+        "$value": { "duration": "{motion.duration.base}", "delay": { "value": 0, "unit": "ms" }, "timingFunction": "{motion.easing.enter}" }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$description": "Intent-based spacing. All $values alias to {space.N} primitives. CSS output → rem (same conversion as primitives).",
+  "space": {
+    "page": {
+      "margin": {
+        "mobile":  { "$value": "{space.16}", "$type": "number" },
+        "tablet":  { "$value": "{space.20}", "$type": "number" },
+        "desktop": { "$value": "{space.24}", "$type": "number" }
+      },
+      "gutter": { "$value": "{space.20}", "$type": "number" }
+    },
+    "section": {
+      "padding": { "$value": "{space.24}", "$type": "number" },
+      "gap":     { "$value": "{space.32}", "$type": "number" }
+    },
+    "container": {
+      "padding": { "$value": "{space.16}", "$type": "number" },
+      "gap":     { "$value": "{space.24}", "$type": "number" }
+    },
+    "component": {
+      "padding": { "$value": "{space.16}", "$type": "number" },
+      "gap":     { "$value": "{space.12}", "$type": "number" }
+    },
+    "element": {
+      "padding": { "$value": "{space.12}", "$type": "number" },
+      "gap":     { "$value": "{space.8}",  "$type": "number" }
+    },
+    "density": {
+      "compact":     { "$value": "{space.4}",  "$type": "number" },
+      "comfortable": { "$value": "{space.8}",  "$type": "number" },
+      "spacious":    { "$value": "{space.16}", "$type": "number" },
+      "relaxed":     { "$value": "{space.32}", "$type": "number" },
+      "generous":    { "$value": "{space.48}", "$type": "number" }
+    }
+  }
+}

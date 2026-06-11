@@ -1,0 +1,63 @@
+{
+  "$description": "Input and Textarea component tokens. Chain: component → semantic → primitive.",
+  "input": {
+    "padding": {
+      "x": { "$value": "{space.12}", "$type": "number" },
+      "y": { "$value": "{space.8}",  "$type": "number" }
+    },
+    "border": {
+      "radius": { "$value": "{radius.4}",       "$type": "number" },
+      "width":  { "$value": "{border.width.default}", "$type": "number" }
+    },
+    "font": {
+      "size":    { "$value": "{font.size.16}",     "$type": "number" },
+      "family":  { "$value": "{font.family.sans}",  "$type": "fontFamily" },
+      "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+      "leading": { "$value": "{font.leading.150}",  "$type": "number" }
+    },
+    "size": {
+      "min-height": { "$value": "{size.component.md}", "$type": "number" }
+    },
+    "bg": {
+      "default":  { "$value": "{color.bg.primary}",  "$type": "color" },
+      "hover":    { "$value": "{color.bg.primary}",  "$type": "color" },
+      "focus":    { "$value": "{color.bg.primary}",  "$type": "color" },
+      "disabled": { "$value": "{color.bg.disabled}", "$type": "color" },
+      "readonly": { "$value": "{color.bg.disabled}", "$type": "color" }
+    },
+    "text": {
+      "default":  { "$value": "{color.text.primary}",    "$type": "color" },
+      "disabled": { "$value": "{color.text.disabled}",   "$type": "color" },
+      "readonly": { "$value": "{color.text.secondary}",  "$type": "color" },
+      "placeholder": {
+        "default":  { "$value": "{color.text.tertiary}",  "$type": "color" },
+        "disabled": { "$value": "{color.text.quaternary}", "$type": "color" }
+      }
+    },
+    "border-color": {
+      "default":  { "$value": "{color.border.default}",                    "$type": "color" },
+      "hover":    { "$value": "{color.border.strong}",                     "$type": "color" },
+      "focus":    { "$value": "{color.interactive.primary.default}",       "$type": "color" },
+      "disabled": { "$value": "{color.border.disabled}",                   "$type": "color" },
+      "readonly": { "$value": "{color.border.default}",                    "$type": "color" },
+      "error":    { "$value": "{color.border.error}",                      "$type": "color" },
+      "success":  { "$value": "{color.border.success}",                    "$type": "color" },
+      "warning":  { "$value": "{color.border.warning}",                    "$type": "color" }
+    },
+    "bg-status": {
+      "error":   { "$value": "{color.bg.error}",   "$type": "color" },
+      "success": { "$value": "{color.bg.success}", "$type": "color" },
+      "warning": { "$value": "{color.bg.warning}", "$type": "color" }
+    },
+    "focus": {
+      "outline-width":  { "$value": "{focus.outline.width}",  "$type": "number" },
+      "outline-color":  { "$value": "{focus.outline.color}",  "$type": "color" },
+      "outline-offset": { "$value": "{focus.outline.offset}", "$type": "number" }
+    },
+    "transition": { "$value": "{transition.base}", "$type": "number" },
+    "shadow": {
+      "default": { "$value": "{shadow.none}", "$type": "string", "$figmaExclude": true },
+      "focus":   { "$value": "{shadow.sm}",   "$type": "string", "$figmaExclude": true }
+    }
+  }
+}

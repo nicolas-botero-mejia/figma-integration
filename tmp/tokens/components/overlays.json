@@ -1,0 +1,138 @@
+{
+  "tooltip": {
+    "padding": {
+      "x": {
+        "$type": "number",
+        "$value": "{space.8}"
+      },
+      "y": {
+        "$type": "number",
+        "$value": "{space.6}"
+      }
+    },
+    "border-radius": {
+      "$type": "number",
+      "$value": "{radius.4}"
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{color.neutral.900}"
+    },
+    "text": {
+      "color": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "size": {
+        "$type": "number",
+        "$value": "{font.size.12}"
+      },
+      "weight": {
+        "$type": "number",
+        "$value": "{font.weight.normal}"
+      }
+    },
+    "arrow-size": {
+      "$type": "number",
+      "$value": 6
+    },
+    "max-width": {
+      "$type": "number",
+      "$value": 200
+    },
+    "transition": {
+      "$type": "number",
+      "$value": "{transition.fast}"
+    },
+    "delay": {
+      "$type": "number",
+      "$value": 150
+    }
+  },
+  "popover": {
+    "padding": {
+      "$type": "number",
+      "$value": "{space.12}"
+    },
+    "border-radius": {
+      "$type": "number",
+      "$value": "{radius.6}"
+    },
+    "border": {
+      "width": {
+        "$type": "number",
+        "$value": "{border.width.default}"
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{color.border.default}"
+      }
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{color.bg.primary}"
+    },
+    "max-width": {
+      "$type": "number",
+      "$value": 300
+    },
+    "transition": {
+      "$type": "number",
+      "$value": "{transition.base}"
+    }
+  },
+  "avatar": {
+    "size": {
+      "sm": {
+        "$type": "number",
+        "$value": 28
+      },
+      "md": {
+        "$type": "number",
+        "$value": 32
+      },
+      "lg": {
+        "$type": "number",
+        "$value": 40
+      },
+      "xl": {
+        "$type": "number",
+        "$value": 48
+      }
+    },
+    "border-radius": {
+      "$type": "number",
+      "$value": "{radius.full}"
+    },
+    "border": {
+      "width": {
+        "$type": "number",
+        "$value": "{border.width.thick}"
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{color.bg.primary}"
+      }
+    },
+    "font": {
+      "size": {
+        "$type": "number",
+        "$value": "{font.size.12}"
+      },
+      "weight": {
+        "$type": "number",
+        "$value": "{font.weight.semibold}"
+      }
+    },
+    "initials": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.blue.500}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    }
+  }
+}

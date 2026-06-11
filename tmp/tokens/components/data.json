@@ -1,0 +1,228 @@
+{
+  "table": {
+    "border": {
+      "width": {
+        "$type": "number",
+        "$value": "{border.width.default}"
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{color.border.light}"
+      }
+    },
+    "header": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.bg.secondary}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.text.primary}"
+      },
+      "font-weight": {
+        "$type": "number",
+        "$value": "{font.weight.semibold}"
+      },
+      "font-size": {
+        "$type": "number",
+        "$value": "{font.size.14}"
+      },
+      "padding": {
+        "x": {
+          "$type": "number",
+          "$value": "{space.16}"
+        },
+        "y": {
+          "$type": "number",
+          "$value": "{space.12}"
+        }
+      }
+    },
+    "cell": {
+      "padding": {
+        "x": {
+          "$type": "number",
+          "$value": "{space.16}"
+        },
+        "y": {
+          "$type": "number",
+          "$value": "{space.12}"
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.text.primary}"
+      },
+      "font-size": {
+        "$type": "number",
+        "$value": "{font.size.14}"
+      }
+    },
+    "row": {
+      "height": {
+        "$type": "number",
+        "$value": 44
+      },
+      "hover-bg": {
+        "$type": "color",
+        "$value": "{color.bg.tertiary}"
+      },
+      "selected-bg": {
+        "$type": "color",
+        "$value": "{color.blue.50}"
+      },
+      "striped-bg": {
+        "$type": "color",
+        "$value": "{color.bg.secondary}"
+      }
+    },
+    "footer": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.bg.secondary}"
+      },
+      "padding": {
+        "x": {
+          "$type": "number",
+          "$value": "{space.16}"
+        },
+        "y": {
+          "$type": "number",
+          "$value": "{space.12}"
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.text.secondary}"
+      }
+    },
+    "resize-handle": {
+      "width": {
+        "$type": "number",
+        "$value": 4
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{color.border.strong}"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "{color.blue.500}"
+      }
+    },
+    "sort-icon": {
+      "size": {
+        "$type": "number",
+        "$value": 14
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{color.text.secondary}"
+      }
+    }
+  },
+  "chart": {
+    "padding": {
+      "$type": "number",
+      "$value": "{space.16}"
+    },
+    "title": {
+      "size": {
+        "$type": "number",
+        "$value": "{font.size.16}"
+      },
+      "weight": {
+        "$type": "number",
+        "$value": "{font.weight.semibold}"
+      },
+      "margin": {
+        "$type": "number",
+        "$value": "{space.12}"
+      }
+    },
+    "axis": {
+      "label-size": {
+        "$type": "number",
+        "$value": "{font.size.12}"
+      },
+      "label-color": {
+        "$type": "color",
+        "$value": "{color.text.secondary}"
+      }
+    },
+    "grid": {
+      "color": {
+        "$type": "color",
+        "$value": "{color.border.light}"
+      },
+      "width": {
+        "$type": "number",
+        "$value": "{border.width.default}"
+      }
+    },
+    "legend": {
+      "font-size": {
+        "$type": "number",
+        "$value": "{font.size.12}"
+      },
+      "gap": {
+        "$type": "number",
+        "$value": "{space.12}"
+      },
+      "padding": {
+        "$type": "number",
+        "$value": "{space.12}"
+      }
+    },
+    "tooltip": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.neutral.900}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "padding": {
+        "x": {
+          "$type": "number",
+          "$value": "{space.8}"
+        },
+        "y": {
+          "$type": "number",
+          "$value": "{space.6}"
+        }
+      },
+      "border-radius": {
+        "$type": "number",
+        "$value": "{radius.4}"
+      }
+    },
+    "series": {
+      "1": {
+        "$type": "color",
+        "$value": "{color.chart.1}"
+      },
+      "2": {
+        "$type": "color",
+        "$value": "{color.chart.2}"
+      },
+      "3": {
+        "$type": "color",
+        "$value": "{color.chart.3}"
+      },
+      "4": {
+        "$type": "color",
+        "$value": "{color.chart.4}"
+      },
+      "5": {
+        "$type": "color",
+        "$value": "{color.chart.5}"
+      },
+      "6": {
+        "$type": "color",
+        "$value": "{color.chart.6}"
+      }
+    }
+  }
+}

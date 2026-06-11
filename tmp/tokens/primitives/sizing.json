@@ -1,0 +1,86 @@
+{
+  "size": {
+    "icon": {
+      "xs": {
+        "$type": "number",
+        "$value": 12
+      },
+      "sm": {
+        "$type": "number",
+        "$value": 16
+      },
+      "md": {
+        "$type": "number",
+        "$value": 20
+      },
+      "lg": {
+        "$type": "number",
+        "$value": 24
+      },
+      "xl": {
+        "$type": "number",
+        "$value": 32
+      },
+      "2xl": {
+        "$type": "number",
+        "$value": 40
+      }
+    },
+    "component": {
+      "xs": {
+        "$type": "number",
+        "$value": 28
+      },
+      "sm": {
+        "$type": "number",
+        "$value": 32
+      },
+      "md": {
+        "$type": "number",
+        "$value": 40
+      },
+      "lg": {
+        "$type": "number",
+        "$value": 48
+      },
+      "xl": {
+        "$type": "number",
+        "$value": 56
+      }
+    }
+  },
+  "z": {
+    "base": {
+      "$type": "number",
+      "$value": 0
+    },
+    "raised": {
+      "$type": "number",
+      "$value": 100
+    },
+    "dropdown": {
+      "$type": "number",
+      "$value": 1000
+    },
+    "sticky": {
+      "$type": "number",
+      "$value": 1100
+    },
+    "overlay": {
+      "$type": "number",
+      "$value": 1200
+    },
+    "modal": {
+      "$type": "number",
+      "$value": 1300
+    },
+    "toast": {
+      "$type": "number",
+      "$value": 1400
+    },
+    "tooltip": {
+      "$type": "number",
+      "$value": 1500
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "$description": "Semantic text scale tokens. Figma treatment: these map to TEXT STYLES (not Variables). The individual size/weight/leading properties are useful for CSS generation via Style Dictionary, and the values drive a future get-styles.js script that creates Figma Text Styles programmatically. Do NOT push these to a Variable collection — they belong in Figma's Text Styles panel.",
+  "text": {
+    "heading": {
+      "1": {
+        "size":    { "$value": "{font.size.40}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.bold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.120}", "$type": "number" }
+      },
+      "2": {
+        "size":    { "$value": "{font.size.32}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.bold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.120}", "$type": "number" }
+      },
+      "3": {
+        "size":    { "$value": "{font.size.28}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.bold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.130}", "$type": "number" }
+      },
+      "4": {
+        "size":    { "$value": "{font.size.24}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.semibold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.130}", "$type": "number" }
+      },
+      "5": {
+        "size":    { "$value": "{font.size.20}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.semibold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.140}", "$type": "number" }
+      },
+      "6": {
+        "size":    { "$value": "{font.size.18}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.semibold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.150}", "$type": "number" }
+      }
+    },
+    "body": {
+      "lg": {
+        "size":    { "$value": "{font.size.18}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "leading": { "$value": "{font.leading.160}", "$type": "number" }
+      },
+      "md": {
+        "size":    { "$value": "{font.size.16}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "leading": { "$value": "{font.leading.150}", "$type": "number" }
+      },
+      "sm": {
+        "size":    { "$value": "{font.size.14}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "leading": { "$value": "{font.leading.150}", "$type": "number" }
+      },
+      "xs": {
+        "size":    { "$value": "{font.size.12}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "leading": { "$value": "{font.leading.140}", "$type": "number" }
+      }
+    },
+    "label": {
+      "lg": {
+        "size":    { "$value": "{font.size.16}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.semibold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.140}", "$type": "number" }
+      },
+      "md": {
+        "size":    { "$value": "{font.size.14}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.semibold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.140}", "$type": "number" }
+      },
+      "sm": {
+        "size":    { "$value": "{font.size.12}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.semibold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.120}", "$type": "number" }
+      },
+      "xs": {
+        "size":    { "$value": "{font.size.11}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.semibold}", "$type": "number" },
+        "leading": { "$value": "{font.leading.110}", "$type": "number" }
+      }
+    },
+    "caption": {
+      "lg": {
+        "size":    { "$value": "{font.size.13}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "leading": { "$value": "{font.leading.140}", "$type": "number" }
+      },
+      "md": {
+        "size":    { "$value": "{font.size.12}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "leading": { "$value": "{font.leading.120}", "$type": "number" }
+      },
+      "sm": {
+        "size":    { "$value": "{font.size.11}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "leading": { "$value": "{font.leading.110}", "$type": "number" }
+      }
+    },
+    "code": {
+      "lg": {
+        "size":    { "$value": "{font.size.16}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "family":  { "$value": "{font.family.mono}", "$type": "fontFamily" },
+        "leading": { "$value": "{font.leading.150}", "$type": "number" }
+      },
+      "md": {
+        "size":    { "$value": "{font.size.14}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "family":  { "$value": "{font.family.mono}", "$type": "fontFamily" },
+        "leading": { "$value": "{font.leading.150}", "$type": "number" }
+      },
+      "sm": {
+        "size":    { "$value": "{font.size.12}", "$type": "number" },
+        "weight":  { "$value": "{font.weight.normal}", "$type": "number" },
+        "family":  { "$value": "{font.family.mono}", "$type": "fontFamily" },
+        "leading": { "$value": "{font.leading.140}", "$type": "number" }
+      }
+    }
+  }
+}

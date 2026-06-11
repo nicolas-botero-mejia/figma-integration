@@ -1,0 +1,32 @@
+{
+  "transition": {
+    "fast": {
+      "$type": "number",
+      "$value": "{motion.duration.fast}"
+    },
+    "base": {
+      "$type": "number",
+      "$value": "{motion.duration.base}"
+    },
+    "slow": {
+      "$type": "number",
+      "$value": "{motion.duration.slow}"
+    }
+  },
+  "animation": {
+    "duration": {
+      "fast": {
+        "$type": "number",
+        "$value": "{motion.duration.fast}"
+      },
+      "base": {
+        "$type": "number",
+        "$value": "{motion.duration.base}"
+      },
+      "slow": {
+        "$type": "number",
+        "$value": "{motion.duration.slow}"
+      }
+    }
+  }
+}

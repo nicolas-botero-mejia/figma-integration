@@ -1,0 +1,16 @@
+{
+  "name": "@nicolas-botero-mejia/figma-integration",
+  "version": "1.0.0",
+  "description": "DTCG JSON ↔ Figma Variables bidirectional sync",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicolas-botero-mejia/figma-integration.git"
+  },
+  "type": "module",
+  "scripts": {
+    "parity": "node scripts/parity-check.mjs",
+    "roundtrip": "node scripts/figma-export-to-dtcg.mjs && node scripts/compare-token-trees.mjs",
+    "test": "npm run parity && npm run roundtrip"
+  },
+  "license": "ISC"
+}

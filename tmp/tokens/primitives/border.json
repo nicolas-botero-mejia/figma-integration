@@ -1,0 +1,30 @@
+{
+  "border": {
+    "width": {
+      "0": {
+        "$type": "number",
+        "$value": 0
+      },
+      "1": {
+        "$type": "number",
+        "$value": 1
+      },
+      "2": {
+        "$type": "number",
+        "$value": 2
+      },
+      "4": {
+        "$type": "number",
+        "$value": 4
+      },
+      "6": {
+        "$type": "number",
+        "$value": 6
+      },
+      "8": {
+        "$type": "number",
+        "$value": 8
+      }
+    }
+  }
+}

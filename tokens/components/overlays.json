@@ -1,0 +1,57 @@
+{
+  "$description": "Overlay and utility component tokens: tooltip, popover, avatar. Chain: component → semantic → primitive.",
+  "tooltip": {
+    "padding": {
+      "x": { "$value": "{space.8}", "$type": "number" },
+      "y": { "$value": "{space.6}", "$type": "number" }
+    },
+    "border-radius": { "$value": "{radius.4}",         "$type": "number" },
+    "bg":            { "$value": "{color.neutral.900}", "$type": "color" },
+    "text": {
+      "color":   { "$value": "{color.white}",      "$type": "color" },
+      "size":    { "$value": "{font.size.12}",     "$type": "number" },
+      "weight":  { "$value": "{font.weight.normal}", "$type": "number" }
+    },
+    "shadow":     { "$value": "{shadow.lg}", "$type": "string", "$figmaExclude": true },
+    "arrow-size": { "$value": 6,             "$type": "number" },
+    "max-width":  { "$value": 200,                  "$type": "number" },
+    "transition": { "$value": "{transition.fast}",  "$type": "number" },
+    "delay":      { "$value": 150,                  "$type": "number" }
+  },
+
+  "popover": {
+    "padding":       { "$value": "{space.12}",         "$type": "number" },
+    "border-radius": { "$value": "{radius.6}",         "$type": "number" },
+    "border": {
+      "width": { "$value": "{border.width.default}", "$type": "number" },
+      "color": { "$value": "{color.border.default}", "$type": "color" }
+    },
+    "bg":         { "$value": "{color.bg.primary}",    "$type": "color" },
+    "shadow":     { "$value": "{shadow.lg}", "$type": "string", "$figmaExclude": true },
+    "max-width":  { "$value": 300,                     "$type": "number" },
+    "transition": { "$value": "{transition.base}",     "$type": "number" }
+  },
+
+  "avatar": {
+    "size": {
+      "sm": { "$value": 28, "$type": "number" },
+      "md": { "$value": 32, "$type": "number" },
+      "lg": { "$value": 40, "$type": "number" },
+      "xl": { "$value": 48, "$type": "number" }
+    },
+    "border-radius": { "$value": "{radius.full}", "$type": "number" },
+    "border": {
+      "width": { "$value": "{border.width.thick}", "$type": "number" },
+      "color": { "$value": "{color.bg.primary}", "$type": "color", "$description": "Matches page bg so avatar rings look correct in dark mode too" }
+    },
+    "font": {
+      "size":   { "$value": "{font.size.12}",       "$type": "number" },
+      "weight": { "$value": "{font.weight.semibold}", "$type": "number" }
+    },
+    "initials": {
+      "bg":   { "$value": "{color.blue.500}", "$type": "color" },
+      "text": { "$value": "{color.white}",    "$type": "color" }
+    },
+    "shadow": { "$value": "{shadow.sm}", "$type": "string", "$figmaExclude": true }
+  }
+}

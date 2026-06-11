@@ -1,0 +1,42 @@
+{
+  "focus": {
+    "outline": {
+      "width": {
+        "$type": "number",
+        "$value": "{border.width.2}"
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{color.interactive.primary.default}"
+      },
+      "offset": {
+        "$type": "number",
+        "$value": "{space.2}"
+      }
+    },
+    "ring": {
+      "width": {
+        "$type": "number",
+        "$value": "{border.width.4}"
+      },
+      "color": {
+        "$type": "color",
+        "$value": "{color.blue.200}"
+      },
+      "offset": {
+        "$type": "number",
+        "$value": "{space.2}"
+      }
+    }
+  },
+  "disabled": {
+    "opacity": {
+      "$type": "number",
+      "$value": "{opacity.50}"
+    },
+    "cursor": {
+      "$type": "string",
+      "$value": "not-allowed"
+    }
+  }
+}

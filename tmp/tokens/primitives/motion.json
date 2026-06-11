@@ -1,0 +1,18 @@
+{
+  "motion": {
+    "duration": {
+      "fast": {
+        "$type": "duration",
+        "$value": 150
+      },
+      "base": {
+        "$type": "duration",
+        "$value": 250
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": 350
+      }
+    }
+  }
+}

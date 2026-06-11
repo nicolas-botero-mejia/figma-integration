@@ -1,0 +1,64 @@
+{
+  "radius": {
+    "0": {
+      "$type": "number",
+      "$value": 0
+    },
+    "1": {
+      "$type": "number",
+      "$value": 1
+    },
+    "2": {
+      "$type": "number",
+      "$value": 2
+    },
+    "3": {
+      "$type": "number",
+      "$value": 3
+    },
+    "4": {
+      "$type": "number",
+      "$value": 4
+    },
+    "6": {
+      "$type": "number",
+      "$value": 6
+    },
+    "8": {
+      "$type": "number",
+      "$value": 8
+    },
+    "10": {
+      "$type": "number",
+      "$value": 10
+    },
+    "12": {
+      "$type": "number",
+      "$value": 12
+    },
+    "14": {
+      "$type": "number",
+      "$value": 14
+    },
+    "16": {
+      "$type": "number",
+      "$value": 16
+    },
+    "20": {
+      "$type": "number",
+      "$value": 20
+    },
+    "24": {
+      "$type": "number",
+      "$value": 24
+    },
+    "32": {
+      "$type": "number",
+      "$value": 32
+    },
+    "full": {
+      "$type": "number",
+      "$value": 9999
+    }
+  }
+}

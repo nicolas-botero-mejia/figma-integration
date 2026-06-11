@@ -1,0 +1,13 @@
+{
+  "modes": ["Comfortable", "Compact", "Spacious"],
+  "defaultMode": "Comfortable",
+  "vars": [
+    {"n":"density/component/padding/x","t":"FLOAT","vm":{"Comfortable":"{space.12}","Compact":"{space.8}","Spacious":"{space.16}"}},
+    {"n":"density/component/padding/y","t":"FLOAT","vm":{"Comfortable":"{space.8}","Compact":"{space.4}","Spacious":"{space.12}"}},
+    {"n":"density/component/height","t":"FLOAT","vm":{"Comfortable":40,"Compact":32,"Spacious":48}},
+    {"n":"density/component/gap","t":"FLOAT","vm":{"Comfortable":"{space.8}","Compact":"{space.6}","Spacious":"{space.12}"}},
+    {"n":"density/table/row-height","t":"FLOAT","vm":{"Comfortable":44,"Compact":32,"Spacious":56}},
+    {"n":"density/table/cell-padding/x","t":"FLOAT","vm":{"Comfortable":"{space.16}","Compact":"{space.12}","Spacious":"{space.20}"}},
+    {"n":"density/table/cell-padding/y","t":"FLOAT","vm":{"Comfortable":"{space.12}","Compact":"{space.6}","Spacious":"{space.16}"}}
+  ]
+}

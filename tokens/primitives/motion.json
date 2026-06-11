@@ -1,0 +1,10 @@
+{
+  "$description": "Motion duration primitives. Figma-safe FLOAT values — unitless ms numbers. Easing curves and transition composites are in motion-easing.json (CSS-only, $figmaExclude:true).",
+  "motion": {
+    "duration": {
+      "fast": { "$value": 150, "$type": "duration" },
+      "base": { "$value": 250, "$type": "duration" },
+      "slow": { "$value": 350, "$type": "duration" }
+    }
+  }
+}
