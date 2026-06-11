@@ -7,19 +7,31 @@
  *   npm run config -- --json
  */
 
+import { readFileSync, existsSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { getConfigStatus, CONFIG_PATH } from './lib/load-config.mjs';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+function readVersion() {
+  const path = join(ROOT, 'VERSION');
+  if (!existsSync(path)) return 'unknown';
+  return readFileSync(path, 'utf8').trim();
+}
 
 const json = process.argv.includes('--json');
 const { status, config, reason } = getConfigStatus();
 
 if (json) {
-  console.log(JSON.stringify({ status, reason: reason ?? null, config }, null, 2));
+  console.log(JSON.stringify({ status, reason: reason ?? null, toolingVersion: readVersion(), config }, null, 2));
   process.exit(status === 'ok' ? 0 : status === 'incomplete' ? 2 : 1);
 }
 
 switch (status) {
   case 'ok':
     console.log(`✅  ${CONFIG_PATH}`);
+    console.log(`    tooling:     v${readVersion()}`);
     console.log(`    fileKey:     ${config.fileKey}`);
     console.log(`    fileName:    ${config.fileName}`);
     console.log(`    collections: ${config.collections.join(', ')}`);

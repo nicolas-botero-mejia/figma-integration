@@ -47,4 +47,8 @@ scripts/                     pipeline + init tooling
 5. Copy CSS-only tokens from `tmp/css-only-tokens/` when ready
 6. `npm test`
 
+## Updating tooling
+
+When scripts or docs change upstream, see **`UPDATING.md`** (git fetch/merge from `upstream`).
+
 Session context: `CLAUDE.md`.

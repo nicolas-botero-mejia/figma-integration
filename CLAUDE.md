@@ -124,3 +124,9 @@ Pipeline scripts call `scripts/lib/load-config.mjs`.
 | `ok` | Ready for pipeline |
 
 Check: `npm run config` or `npm run config -- --json`
+
+---
+
+## Updating tooling
+
+When upstream scripts or docs change, see **`UPDATING.md`** (git fetch/merge from `upstream`).
