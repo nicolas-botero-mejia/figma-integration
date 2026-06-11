@@ -4,8 +4,10 @@
 npm install
 ```
 
-1. **MCP** — `.cursor/mcp.json` in repo root. Restart Cursor, Figma OAuth.
-2. **Skills** — copy from https://github.com/southleft/figma-console-mcp-skills (`skills/*` → `.cursor/skills/`). Not committed here on purpose.
-3. **Validate** — `npm test`
+1. Open in **Cursor** → Figma MCP OAuth (`.cursor/mcp.json`)
+2. Paste Figma file URL in chat → **"Initialize figma-integration"**
+3. **`npm run config`** — must show ✅
+4. **Skills** — copy from https://github.com/southleft/figma-console-mcp-skills
+5. Extract from Figma → populate `tokens/` → **`npm test`**
 
-Figma file: `config/figma.json`
+`config/figma.json` is gitignored — generated locally at init.

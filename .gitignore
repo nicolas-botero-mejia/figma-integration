@@ -1,3 +1,12 @@
 node_modules/
 .DS_Store
 output/
+
+# Generated at init — never commit (contains your Figma file key)
+config/figma.json
+
+# Local artifacts — populate from Figma / your machine
+tmp/figma-export/
+tmp/tokens/
+tmp/css-only-tokens/
+tmp/session-findings.md

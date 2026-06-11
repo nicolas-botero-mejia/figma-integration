@@ -19,6 +19,9 @@
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'fs';
 import { join, relative } from 'path';
+import { loadConfig } from './lib/load-config.mjs';
+
+loadConfig();
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const TOKENS_DIR = join(ROOT, 'tokens');

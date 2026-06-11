@@ -15,6 +15,9 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
+import { loadConfig } from './lib/load-config.mjs';
+
+loadConfig();
 
 const ROOT = new URL('..', import.meta.url).pathname;
 

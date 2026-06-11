@@ -2,77 +2,125 @@
 
 ## What This Is
 
-Design-token pipeline: DTCG JSON ↔ Figma Variables on the REDY Design System file.
+Design-token pipeline: DTCG JSON ↔ Figma Variables bidirectional sync.
+
+**Figma is the source of truth.** The `tokens/` tree ships as empty JSON scaffolds — extract from Figma to populate.
 
 ---
 
-## Figma Source
+## Initialize (first-time setup)
 
-**File:** `https://www.figma.com/design/vuoYR8rDz1O27OsqmQfd84/REDY-Design-System?node-id=73443-2&m=dev`
+The user provides a **Figma file URL**. You discover everything else via MCP.
 
-| Field | Value |
-|---|---|
-| File key | `vuoYR8rDz1O27OsqmQfd84` |
-| Canonical config | `config/figma.json` |
+### Trigger
+
+User says: *"Initialize figma-integration"* (or similar) and pastes a Figma design URL.
+
+### Steps
+
+1. **Parse URL** (no MCP needed):
+   ```bash
+   npm run parse-url -- "https://www.figma.com/design/FILE_KEY/file-name?node-id=0-1"
+   ```
+   Returns `fileKey`, `fileName`, `url`, optional `nodeId`.
+
+2. **Ensure Figma MCP is connected** — OAuth via `.cursor/mcp.json`. Load `figma-use` skill before `use_figma`.
+
+3. **Discover variable collections** in that file via `use_figma`:
+   ```javascript
+   // List local variable collections + modes (adapt if API differs)
+   const collections = await figma.variables.getLocalVariableCollectionsAsync();
+   return collections.map(c => ({ name: c.name, id: c.id, modes: c.modes.map(m => m.name) }));
+   ```
+   Use `fileKey` from step 1. If the file is a library, also check `getAvailableLibraryVariableCollectionsAsync()`.
+
+4. **Write config**:
+   ```bash
+   npm run init -- --url "https://…" --collections Primitives Semantic Components Density Layout
+   ```
+   Adjust collection names to match what step 3 returned. Order matters for `assemble-figma-export.mjs`.
+
+5. **Verify**:
+   ```bash
+   npm run config
+   ```
+   Must show `✅` with fileKey and collections.
+
+6. **Optional — first extraction**: extract variables per collection → `tmp/figma-export/chunks/master/<Collection>.json` → assemble → convert to DTCG.
+
+### Partial init
+
+If collections aren't discovered yet:
+```bash
+npm run init -- --url "https://…"
+```
+Status will be `incomplete`. After MCP discovery:
+```bash
+npm run init -- --merge --collections CollectionA CollectionB
+```
+
+### Config files
+
+| File | Committed | Purpose |
+|---|---|---|
+| `config/figma.defaults.json` | Yes | MCP server names, empty collections |
+| `config/figma.json` | No (gitignored) | fileKey, url, collections — generated at init |
 
 ---
 
-## How to Start
-
-**Returning session:** Read `tmp/session-findings.md`, then verify parity:
+## How to Start (returning session)
 
 ```bash
-npm test
+npm run config    # must be ok before pipeline scripts
+npm test          # after Figma export + populated tokens/
 ```
 
 **Figma MCP:** Remote OAuth — no Figma Desktop required.
 
-1. MCP config: `.cursor/mcp.json` (committed) or `/add-plugin figma`
-2. Server: `figma` at `https://mcp.figma.com/mcp` (plugin tools may show as `plugin-figma-figma`)
-3. **Skills:** copy from https://github.com/southleft/figma-console-mcp-skills into `.cursor/skills/` (see README)
+1. MCP config: `.cursor/mcp.json`
+2. Server: `figma` at `https://mcp.figma.com/mcp`
+3. **Skills:** copy from https://github.com/southleft/figma-console-mcp-skills into `.cursor/skills/`
 4. Load `figma-use` before every `use_figma` call
-
-**Do not use:** `figma-console-mcp`, `figma-mcp-go`, `figma-developer-mcp` — removed from this project.
 
 ---
 
-## Pipeline (verified)
+## Pipeline
 
-| Direction | Tooling | Status |
-|---|---|---|
-| JSON → Figma | `dtcg-to-figma-tokens.mjs` + `use_figma` apply | ✅ 794/794 |
-| Figma → flat export | `use_figma` extract → `assemble-figma-export.mjs` | ✅ |
-| Figma → DTCG files | `figma-export-to-dtcg.mjs` → `tmp/tokens/` | ✅ 794/794 |
-| DTCG → CSS | `dtcg-convert.mjs` | ✅ |
-| Parity | `parity-check.mjs`, `compare-token-trees.mjs` | ✅ 100% |
+| Direction | Tooling |
+|---|---|
+| Figma → flat export | `use_figma` extract → `assemble-figma-export.mjs` |
+| Figma → DTCG files | `figma-export-to-dtcg.mjs` → `tmp/tokens/` → merge to `tokens/` |
+| JSON → Figma | `dtcg-to-figma-tokens.mjs` + `use_figma` apply |
+| DTCG → CSS | `dtcg-convert.mjs` |
+| Parity | `parity-check.mjs`, `compare-token-trees.mjs` |
 
-CSS-only tokens (shadows, easing, semantic typography) stay in `tokens/` only — not in Figma Variables. See `scripts/README.md`.
+**CSS-only tokens** (shadows, easing curves, semantic typography) do not come from Figma Variables. Keep them in `tmp/css-only-tokens/` locally and merge into `tokens/` when ready.
 
 ---
 
 ## Repo Structure
 
 ```
-config/
-  figma.json             → file key, URL, collection names
-tokens/
-  primitives/            → raw values + CSS-only files (shadow, motion-easing)
-  semantic/              → theme aliases (+ typography.json for Text Styles)
-  components/            → component tokens
-  density/               → multi-mode density tokens
-  layout/                → breakpoints + grid
-tmp/
-  figma-export/          → master-vars.json + per-collection chunks
-  tokens/                → reconstructed DTCG from Figma (validation)
-  session-findings.md    → running log — READ at session start
-scripts/                 → see scripts/README.md
+config/figma.defaults.json
+config/figma.json            gitignored — created at init
+tokens/                      empty scaffolds
+tmp/figma-export/
+tmp/tokens/
+tmp/css-only-tokens/
+scripts/
 ```
 
 ---
 
-## Where Findings Go
+## Config guard
 
-**CRC findings file:**
-`/Users/nicolasbotero/Library/CloudStorage/OneDrive-TheKsquareGroup/CRC_DS_Group/findings/phase-01-poc-01-token-pipeline-notes.md`
+Pipeline scripts call `scripts/lib/load-config.mjs`.
 
-Write incrementally after each step. Primary reusable outputs preserved in CRC project, not only here.
+| Status | Meaning |
+|---|---|
+| `not_initialized` | No `config/figma.json` — run Initialize |
+| `incomplete` | fileKey set, collections empty — MCP discovery needed |
+| `invalid` | Bad JSON or fileKey |
+| `ok` | Ready for pipeline |
+
+Check: `npm run config` or `npm run config -- --json`

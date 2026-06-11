@@ -1,10 +1,1 @@
-{
-  "$description": "Semantic border-width aliases. Components reference these instead of {border.width.N} primitives directly.",
-  "border": {
-    "width": {
-      "default": { "$value": "{border.width.1}", "$type": "number", "$description": "Standard 1px border for inputs, cards, badges" },
-      "thick":   { "$value": "{border.width.2}", "$type": "number", "$description": "Emphasis border for active tabs, focus indicators" },
-      "heavy":   { "$value": "{border.width.4}", "$type": "number", "$description": "Used for focus rings" }
-    }
-  }
-}
+{}

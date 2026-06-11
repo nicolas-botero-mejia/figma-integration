@@ -7,6 +7,9 @@
  */
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import { loadConfig } from './lib/load-config.mjs';
+
+loadConfig();
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const label = process.argv[2];

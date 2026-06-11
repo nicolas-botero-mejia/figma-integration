@@ -8,6 +8,9 @@
   },
   "type": "module",
   "scripts": {
+    "config": "node scripts/check-config.mjs",
+    "init": "node scripts/init-config.mjs",
+    "parse-url": "node scripts/parse-figma-url.mjs",
     "parity": "node scripts/parity-check.mjs",
     "roundtrip": "node scripts/figma-export-to-dtcg.mjs && node scripts/compare-token-trees.mjs",
     "test": "npm run parity && npm run roundtrip"

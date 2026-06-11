@@ -5,6 +5,9 @@
  * Output: JSON { collection, mode, tokens }
  */
 import { readFileSync } from 'fs';
+import { loadConfig } from './lib/load-config.mjs';
+
+loadConfig();
 
 // ── CLI args ──────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);

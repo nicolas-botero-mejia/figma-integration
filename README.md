@@ -4,7 +4,7 @@ DTCG JSON ↔ Figma Variables bidirectional sync, with CSS/Tailwind output.
 
 Repo: [github.com/nicolas-botero-mejia/figma-integration](https://github.com/nicolas-botero-mejia/figma-integration)
 
-**Figma:** [REDY Design System](https://www.figma.com/design/vuoYR8rDz1O27OsqmQfd84/REDY-Design-System?node-id=73443-2&m=dev) · key `vuoYR8rDz1O27OsqmQfd84` (`config/figma.json`)
+**Figma is the starting point.** Token JSON files ship empty — populate them by extracting from your Figma file.
 
 ## Setup
 
@@ -12,33 +12,39 @@ Repo: [github.com/nicolas-botero-mejia/figma-integration](https://github.com/nic
 npm install   # no runtime deps — scripts are zero-dep Node
 ```
 
-**MCP:** `.cursor/mcp.json` — restart Cursor, Figma OAuth. Optional: `/add-plugin figma`.
+1. Open in **Cursor** — Figma MCP OAuth (`.cursor/mcp.json` is preconfigured).
+2. Paste your **Figma file URL** in chat and ask: **"Initialize figma-integration"**
+3. The agent discovers collections via MCP and writes `config/figma.json` (local, gitignored).
+4. **Skills:** copy from [southleft/figma-console-mcp-skills](https://github.com/southleft/figma-console-mcp-skills) into `.cursor/skills/`.
 
-**Skills:** copy from [southleft/figma-console-mcp-skills](https://github.com/southleft/figma-console-mcp-skills):
-
-```bash
-git clone https://github.com/southleft/figma-console-mcp-skills.git /tmp/figma-skills
-cp -R /tmp/figma-skills/skills/* .cursor/skills/
-```
+Verify: `npm run config`
 
 ## Commands
 
 ```bash
-npm test
-node scripts/dtcg-to-figma-tokens.mjs --mode Value tokens/primitives/color.json
-node scripts/figma-export-to-dtcg.mjs
-node scripts/dtcg-convert.mjs tokens/primitives/motion.json --format css-vars
+npm run config          # status: not_initialized | incomplete | ok
+npm run parse-url -- "https://www.figma.com/design/…"
+npm run init -- --url "https://…" --collections Primitives Semantic …
+npm test                # after Figma export + populated tokens/
 ```
 
 ## Layout
 
 ```
-config/figma.json       Figma file key + URL
-tokens/                 Source DTCG JSON
-tmp/figma-export/       Figma variable exports (master-vars.json + chunks)
-tmp/tokens/             Reconstructed DTCG from Figma (validation)
-tmp/session-findings.md Session log
-scripts/                Pipeline tooling
+config/figma.defaults.json   committed MCP defaults
+config/figma.json            generated at init (gitignored)
+tokens/                      empty scaffolds — populated from Figma
+tmp/figma-export/            local Figma exports (gitignored)
+scripts/                     pipeline + init tooling
 ```
 
-Session context: `CLAUDE.md`, `tmp/session-findings.md`.
+## Workflow
+
+1. **Initialize** — URL in chat → agent writes config (see `CLAUDE.md` §Initialize)
+2. Extract variables from Figma via MCP → `tmp/figma-export/chunks/`
+3. `node scripts/assemble-figma-export.mjs master tmp/figma-export/master-vars.json`
+4. `node scripts/figma-export-to-dtcg.mjs` → merge into `tokens/`
+5. Copy CSS-only tokens from `tmp/css-only-tokens/` when ready
+6. `npm test`
+
+Session context: `CLAUDE.md`.
