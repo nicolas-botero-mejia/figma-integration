@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { loadConfig } from './lib/load-config.mjs';
 
-loadConfig();
+const config = loadConfig();
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const label = process.argv[2];
@@ -20,7 +20,11 @@ if (!label || !outRel) {
 }
 
 const chunkDir = join(ROOT, 'tmp/figma-export/chunks', label);
-const ORDER = ['Primitives', 'Semantic', 'Components', 'Density', 'Layout'];
+const ORDER = config.collections;
+if (!ORDER?.length) {
+  console.error('❌  No collections in config/figma.json — run npm run init -- --collections …');
+  process.exit(1);
+}
 
 const output = {};
 let total = 0;

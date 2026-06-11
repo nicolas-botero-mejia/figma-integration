@@ -13,7 +13,7 @@
  *   node scripts/figma-export-to-dtcg.mjs --input tmp/figma-export/copy-vars.json --output tmp/tokens-copy
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { loadConfig } from './lib/load-config.mjs';
 
@@ -152,6 +152,13 @@ function routeVariable(collection, name) {
 }
 
 const { input, output } = parseArgs(process.argv.slice(2));
+
+if (!existsSync(input)) {
+  console.error('❌  Missing', input);
+  console.error('    Run scripts/assemble-figma-export.mjs first.');
+  process.exit(1);
+}
+
 const figmaData = JSON.parse(readFileSync(input, 'utf8'));
 
 const fileTrees = new Map();

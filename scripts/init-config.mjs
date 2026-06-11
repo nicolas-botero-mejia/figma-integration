@@ -53,7 +53,6 @@ if (opts.help) {
 }
 
 const existing = readLocalConfig();
-const { status: existingStatus } = getConfigStatus();
 
 if (existing && !opts.force && !opts.merge) {
   console.error('❌  config/figma.json already exists.');

@@ -5,7 +5,7 @@
  * Compares source DTCG token files (tokens/) against the Figma Variables export
  * (tmp/figma-export/master-vars.json).
  * 
- * Rules (from session-findings.md F16):
+ * Rules:
  *   - Skip any source token where $figmaExclude: true
  *   - Skip $description / $modes metadata keys
  *   - COLOR: normalize hex to lowercase
