@@ -80,6 +80,13 @@ export function parseFigmaUrl(input) {
   const nodeParam = url.searchParams.get('node-id');
   const nodeId = nodeParam ? nodeParam.replace(/-/g, ':') : undefined;
 
+  const warnings = [];
+  if (url.searchParams.get('m') === 'dev') {
+    warnings.push(
+      'URL was copied from Dev Mode (?m=dev). Copy the link from Design mode instead — Dev Mode links often break MCP file access.',
+    );
+  }
+
   const canonicalPath =
     editorType === 'figjam'
       ? `/board/${fileKey}/${encodeURIComponent(fileName)}`
@@ -93,6 +100,7 @@ export function parseFigmaUrl(input) {
     url: canonical,
     ...(nodeId ? { nodeId } : {}),
     editorType,
+    ...(warnings.length ? { warnings } : {}),
   };
 }
 

@@ -1,5 +1,5 @@
 // get-styles.js — capture boundVariables + resolved values for all local styles.
-// Run via use_figma (skillNames: "figma-use").
+// Run via Figma MCP in your editor (Plugin API context).
 // Returns: textStyles, effectStyles, paintStyles — each with resolved variable names
 // and per-property/per-effect boundVariables.
 

@@ -111,7 +111,8 @@ if (status === 'ok') {
 } else if (status === 'incomplete') {
   console.log('\n⚠️  Partial init — collections still needed');
   console.log(`    ${reason}`);
-  console.log('    Discover collections via Figma MCP, then re-run init with --merge --collections …');
+  console.log('    Add names from Figma → Local variables, then:');
+  console.log('    npm run init -- --merge --collections …');
 } else {
   console.log(`\n⚠️  Status: ${status}${reason ? ` — ${reason}` : ''}`);
 }

@@ -6,6 +6,18 @@ Project data (`tokens/`, `config/figma.json`, `tmp/`) is local to your clone —
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased]
+
+### Changed
+
+- Editor-agnostic docs: `AGENTS.md`, `docs/setup.md`, `.github/copilot-instructions.md`
+- CLI-first init (`npm run init`) — no Cursor-specific workflow
+- MCP examples for VS Code (`.vscode/mcp.json`) and generic (`config/mcp.example.json`)
+- Removed `CLAUDE.md` and Cursor-only plugin alias from defaults
+- Added `docs/figma-mcp-and-skills.md` — MCP vs skills vs `use_figma`, install steps, connection test, Design vs Dev Mode URLs
+- Added `scripts/mcp-connection-test.js` and Dev Mode warning in `parse-url`
+- Added `.cursor/skills/README.md` — skills install pointer (skills not bundled)
+
 ## [1.0.0] - 2026-06-11
 
 ### Added

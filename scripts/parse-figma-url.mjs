@@ -16,7 +16,11 @@ if (!url || url === '--help' || url === '-h') {
 }
 
 try {
-  console.log(JSON.stringify(parseFigmaUrl(url), null, 2));
+  const result = parseFigmaUrl(url);
+  if (result.warnings?.length) {
+    for (const w of result.warnings) console.warn(`⚠️  ${w}`);
+  }
+  console.log(JSON.stringify(result, null, 2));
 } catch (err) {
   console.error(`❌  ${err.message}`);
   process.exit(1);

@@ -57,7 +57,7 @@ If there are **no conflicts**, you're done. Run `npm run config` and spot-check 
 | `scripts/` | **Upstream** (theirs) — unless you intentionally patched a script locally |
 | `config/figma.defaults.json` | **Upstream** — then re-run `npm run init -- --merge` if collections changed |
 | `package.json` | **Upstream** for `scripts` section; keep your repo metadata if this is a fork |
-| `README.md`, `CLAUDE.md`, `UPDATING.md` | **Upstream** |
+| `README.md`, `AGENTS.md`, `docs/`, `UPDATING.md` | **Upstream** |
 | `tokens/` | **Yours** — populated from Figma; never overwrite with empty scaffolds |
 | `config/figma.json` | **Yours** — gitignored; merge won't touch it |
 | `tmp/` | **Yours** — gitignored |

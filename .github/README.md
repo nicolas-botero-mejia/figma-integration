@@ -1,13 +1,16 @@
 # GitHub / new machine
 
 ```bash
+gh repo clone nicolas-botero-mejia/figma-integration
+cd figma-integration
 npm install
 ```
 
-1. Open in **Cursor** → Figma MCP OAuth (`.cursor/mcp.json`)
-2. Paste Figma file URL in chat → **"Initialize figma-integration"**
-3. **`npm run config`** — must show ✅
-4. **Skills** — copy from https://github.com/southleft/figma-console-mcp-skills
-5. Extract from Figma → populate `tokens/` → **`npm test`**
+1. **`docs/figma-mcp-and-skills.md`** — Figma MCP OAuth, install **`figma-use`** skill, connection test
+2. **`docs/setup.md`** — `npm run init` (Design-mode Figma URL + collections)
+3. **`npm run config`** — must pass
+4. Extract from Figma → populate `tokens/` → **`npm test`**
 
-`config/figma.json` is gitignored — generated locally at init.
+**Copilot:** `.github/copilot-instructions.md` · **Agents:** `AGENTS.md`
+
+Skills are **not** in this repo — install from https://github.com/southleft/figma-console-mcp-skills

@@ -42,14 +42,16 @@ switch (status) {
     console.log(`    fileName:    ${config.fileName}`);
     console.log(`    ${reason}`);
     console.log('');
-    console.log('Discover collections via Figma MCP, then:');
-    console.log('  npm run init -- --merge --collections Primitives Semantic …');
+    console.log('Add collection names from Figma → Local variables, then:');
+    console.log('  npm run init -- --merge --collections …');
     process.exit(2);
   case 'not_initialized':
     console.log(`⭕  Not initialized — ${CONFIG_PATH} missing or empty`);
     console.log('');
-    console.log('Paste your Figma file URL in Cursor chat and ask:');
-    console.log('  "Initialize figma-integration"');
+    console.log('Paste your Figma file URL and collection names, then run:');
+    console.log('  npm run init -- --url "https://…" --collections …');
+    console.log('');
+    console.log('See docs/setup.md');
     process.exit(1);
   case 'invalid':
     console.log(`❌  Invalid config — ${reason}`);
