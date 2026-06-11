@@ -69,7 +69,7 @@ export function getConfigStatus() {
     return {
       status: 'incomplete',
       config,
-      reason: 'collections is empty — add names from Figma Local variables panel, then npm run init -- --merge --collections …',
+      reason: 'collections is empty — run npm run init (defaults from tokens/ folders) or pass --collections',
     };
   }
 
@@ -96,8 +96,9 @@ function fail(status, reason) {
       '',
       '  npm run init -- --url "https://www.figma.com/design/…" --collections Primitives Semantic …',
       '',
-      'Collection names: Figma → Local variables panel (each tab = one collection).',
-      'See docs/setup.md or AGENTS.md',
+      'Collection names: auto-derived from tokens/ scaffold (primitives → Primitives, etc.).',
+      'Override if your Figma file uses different names:',
+      '  npm run init -- --merge --collections YourCollectionA YourCollectionB …',
     ].join('\n'));
   } else if (status === 'incomplete') {
     console.error([

@@ -36,23 +36,27 @@ npm run parse-url -- "https://www.figma.com/design/FILE_KEY/file-name?node-id=0-
 
 Returns `fileKey`, `fileName`, `url`, optional `nodeId`. No MCP required.
 
-### Step 2 — Get collection names
+### Step 2 — Collections (automatic)
 
-**Option A — Figma UI (no MCP):**  
-In the Figma file → **Local variables** panel → note each **collection** name (order matters for export).
+If `--collections` is omitted, **`npm run init` reads the `tokens/` scaffold**:
 
-**Option B — Figma MCP:**  
-After OAuth + **`figma-use`** skill installed, run `scripts/mcp-connection-test.js` via **`use_figma`**. Use returned collection names for init. See `docs/figma-mcp-and-skills.md`.
+| Folder | Collection |
+|---|---|
+| `primitives/` | Primitives |
+| `semantic/` | Semantic |
+| `components/` | Components |
+| `density/` | Density |
+| `layout/` | Layout |
 
-**URL:** Design mode only — not Dev Mode (`?m=dev`). `npm run parse-url` warns if detected.
+Override with `--collections` if your Figma file names differ. Option: confirm against Figma **Local variables** or MCP connection test.
 
 ### Step 3 — Write config
 
 ```bash
-npm run init -- --url "https://www.figma.com/design/…" --collections Primitives Semantic Components Density Layout
+npm run init -- --url "https://www.figma.com/design/…"
 ```
 
-Use exact collection names from step 2. Order matters for `assemble-figma-export.mjs`.
+Override with `--collections` only if Figma names differ from the `tokens/` scaffold.
 
 ### Step 4 — Verify
 

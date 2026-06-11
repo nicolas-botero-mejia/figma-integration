@@ -17,10 +17,9 @@ Use **Design mode** links (`figma.com/design/…`). **Not Dev Mode** (`?m=dev`) 
 ## Initialize
 
 1. `npm run parse-url -- "<url>"` — check for dev-mode warning
-2. Get collection names (user, Figma UI, or `use_figma` test script)
-3. `npm run init -- --url "<url>" --collections …`
-4. `npm run config` — must pass
-5. MCP connection test — collections returned must match config
+2. `npm run init -- --url "<url>"` — collections from `tokens/` scaffold by default
+3. `npm run config` — must pass
+4. MCP connection test — confirm Figma names match; `--merge --collections` if not
 
 ## Key commands
 
@@ -28,7 +27,7 @@ Use **Design mode** links (`figma.com/design/…`). **Not Dev Mode** (`?m=dev`) 
 gh repo clone nicolas-botero-mejia/figma-integration
 npm run config
 npm run parse-url -- "<figma-url>"
-npm run init -- --url "<figma-url>" --collections Primitives Semantic …
+npm run init -- --url "<figma-url>"
 npm test
 ```
 

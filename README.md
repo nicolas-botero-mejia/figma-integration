@@ -20,14 +20,11 @@ npm install
 
 ```bash
 npm run parse-url -- "https://www.figma.com/design/YOUR_KEY/your-file-name"
-npm run init -- \
-  --url "https://www.figma.com/design/YOUR_KEY/your-file-name" \
-  --collections Primitives Semantic Components Density Layout
+npm run init -- --url "https://www.figma.com/design/YOUR_KEY/your-file-name"
 npm run config
 ```
 
-Collection names: Figma → **Local variables** panel (each tab = one collection).  
-Setup: **`docs/setup.md`** · MCP + skills: **`docs/figma-mcp-and-skills.md`**
+Collections default from `tokens/` scaffold. Override with `--collections` if needed.
 
 Use a **Design-mode** URL (not Dev Mode `?m=dev`). MCP + **`figma-use`** skill required for extract/push — install separately.
 

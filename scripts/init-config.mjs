@@ -9,21 +9,26 @@
  *   npm run init -- --merge --collections Density Layout   # update collections only
  */
 
-import { writeFileSync, existsSync, readFileSync } from 'fs';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { parseFigmaUrl, parseCollectionsArg } from './lib/parse-figma-url.mjs';
-import { readDefaults, readLocalConfig, mergeConfig, CONFIG_PATH, getConfigStatus } from './lib/load-config.mjs';
+import { readDefaults, readLocalConfig, mergeConfig, CONFIG_PATH, getConfigStatus, ROOT } from './lib/load-config.mjs';
+import { discoverCollectionsFromTokens } from './lib/discover-collections.mjs';
+
+const TOKENS_DIR = join(ROOT, 'tokens');
 
 function usage() {
   console.log(`
 Usage: npm run init -- --url "<figma-url>" [--collections <names…>] [--merge]
 
   --url           Figma design/file URL (required unless --merge with existing config)
-  --collections   Variable collection names (comma-separated or repeated flags)
+  --collections   Variable collection names (optional — default: from tokens/ scaffold folders)
   --merge         Merge into existing config/figma.json instead of replacing
   --force         Overwrite existing config/figma.json
 
 Examples:
   npm run parse-url -- "https://www.figma.com/design/AbCdEf123456/my-design-system"
+  npm run init -- --url "https://…"
   npm run init -- --url "https://…" --collections Primitives Semantic Components Density Layout
 `);
 }
@@ -77,6 +82,14 @@ if (opts.url) {
 const defaults = readDefaults();
 const base = opts.merge && existing ? mergeConfig(defaults, existing) : { ...defaults };
 
+let collections = opts.collections;
+if (!collections.length) {
+  collections = discoverCollectionsFromTokens(TOKENS_DIR);
+  if (collections.length) {
+    console.log(`ℹ️  Collections from tokens/ scaffold: ${collections.join(', ')}`);
+  }
+}
+
 const local = {
   ...(parsed
     ? {
@@ -86,7 +99,7 @@ const local = {
         ...(parsed.nodeId ? { nodeId: parsed.nodeId } : {}),
       }
     : {}),
-  ...(opts.collections.length ? { collections: opts.collections } : {}),
+  ...(collections.length ? { collections } : {}),
   initializedAt: new Date().toISOString(),
 };
 
@@ -110,8 +123,8 @@ if (status === 'ok') {
 } else if (status === 'incomplete') {
   console.log('\n⚠️  Partial init — collections still needed');
   console.log(`    ${reason}`);
-  console.log('    Add names from Figma → Local variables, then:');
-  console.log('    npm run init -- --merge --collections …');
+  console.log('    Default: derived from tokens/ folders (see tokens/README.md)');
+  console.log('    Or override: npm run init -- --merge --collections …');
 } else {
   console.log(`\n⚠️  Status: ${status}${reason ? ` — ${reason}` : ''}`);
 }

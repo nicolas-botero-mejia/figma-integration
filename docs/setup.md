@@ -60,25 +60,19 @@ npm run parse-url -- "https://www.figma.com/design/YOUR_KEY/your-file-name"
 # ⚠️ warns if Dev Mode detected
 ```
 
-### Collection names
-
-Figma → **Local variables** panel → each tab = one collection.
-
 ### Run init
 
-```bash
-npm run init -- \
-  --url "https://www.figma.com/design/YOUR_KEY/your-file-name" \
-  --collections Primitives Semantic Components Density Layout
+Collections default from **`tokens/` folders** (see `tokens/README.md`):
 
+```bash
+npm run init -- --url "https://www.figma.com/design/YOUR_KEY/your-file-name"
 npm run config
 ```
 
-Partial init (URL first, collections later):
+Override if your Figma collections are named differently:
 
 ```bash
-npm run init -- --url "https://…"
-npm run init -- --merge --collections Primitives Semantic Components
+npm run init -- --url "https://…" --collections YourCollectionA YourCollectionB
 ```
 
 ---
