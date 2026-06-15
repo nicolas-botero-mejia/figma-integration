@@ -3,7 +3,7 @@ import { join } from 'path';
 
 /**
  * Default Figma Variable collection order, derived from tokens/ scaffold folders.
- * Must match tokens/README.md and figma-export-to-dtcg ROUTES keys.
+ * Must match README.md tokens/ table and figma-export-to-dtcg ROUTES keys.
  */
 export const TOKEN_FOLDER_TO_COLLECTION = [
   ['primitives', 'Primitives'],

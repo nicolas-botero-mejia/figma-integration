@@ -1,8 +1,10 @@
 # Figma Integration — agent instructions
 
-Tool-agnostic guidance for AI assistants (GitHub Copilot, VS Code, Cursor, etc.) working in this repo.
+Tool-agnostic guidance for AI assistants working in this repo.
 
-**CLI is the source of truth.** Do not require a specific editor. All init and validation steps must be achievable with `npm` scripts and `gh`.
+**Human setup (MCP plugin, OAuth, skills):** see **`README.md`**.
+
+**CLI is the source of truth.** All init and validation steps must be achievable with `npm` scripts and `gh`. Do not require a specific editor.
 
 ---
 
@@ -14,73 +16,37 @@ Design-token pipeline: DTCG JSON ↔ Figma Variables bidirectional sync.
 
 ---
 
-## Clone (GitHub CLI)
-
-```bash
-gh repo clone nicolas-botero-mejia/figma-integration
-cd figma-integration
-npm install
-```
-
----
-
 ## Initialize (CLI-first)
 
-The user provides a **Figma file URL**. Collection names come from the Figma file (UI or MCP).
-
-### Step 1 — Parse URL
+The user provides a **Figma file URL**.
 
 ```bash
-npm run parse-url -- "https://www.figma.com/design/FILE_KEY/file-name?node-id=0-1"
-```
-
-Returns `fileKey`, `fileName`, `url`, optional `nodeId`. No MCP required.
-
-### Step 2 — Collections (automatic)
-
-If `--collections` is omitted, **`npm run init` reads the `tokens/` scaffold**:
-
-| Folder | Collection |
-|---|---|
-| `primitives/` | Primitives |
-| `semantic/` | Semantic |
-| `components/` | Components |
-| `density/` | Density |
-| `layout/` | Layout |
-
-Override with `--collections` if your Figma file names differ. Option: confirm against Figma **Local variables** or MCP connection test.
-
-### Step 3 — Write config
-
-```bash
+npm run parse-url -- "https://www.figma.com/design/FILE_KEY/file-name"
 npm run init -- --url "https://www.figma.com/design/…"
+npm run config    # must exit 0, status ok
 ```
 
-Override with `--collections` only if Figma names differ from the `tokens/` scaffold.
+Collections default from `tokens/` folders (primitives → Primitives, semantic → Semantic, components → Components, density → Density, layout → Layout). Override with `--collections` if Figma names differ.
 
-### Step 4 — Verify
-
-```bash
-npm run config
-```
-
-Must exit 0 with `status: ok` (or human-readable ✅).
-
-### Partial init
-
-URL only (collections later):
+Partial init:
 
 ```bash
 npm run init -- --url "https://…"
 npm run init -- --merge --collections CollectionA CollectionB
 ```
 
-### Config files
+---
 
-| File | Committed | Purpose |
-|---|---|---|
-| `config/figma.defaults.json` | Yes | Shared defaults |
-| `config/figma.json` | No (gitignored) | fileKey, url, collections — created by `npm run init` |
+## Figma MCP (extract/push only)
+
+Required for variable extract/push — not for CLI-only init when collection names are known. Setup order in **`README.md`**:
+
+1. Figma MCP plugin installed
+2. OAuth authenticated (Copilot app: **`copilot`** CLI — see README)
+3. **`figma-use`** skill installed from [southleft/figma-console-mcp-skills](https://github.com/southleft/figma-console-mcp-skills) — load before every **`use_figma`** call
+4. Run **`scripts/mcp-connection-test.js`** via `use_figma` before first extract
+
+Use **Design-mode** URLs only (not `?m=dev`).
 
 ---
 
@@ -107,37 +73,6 @@ npm test          # after Figma export + populated tokens/
 
 ---
 
-## Optional: Figma MCP + skills
-
-Required for **variable extract/push** (not for CLI-only init if collection names are known).
-
-| Piece | Bundled in repo? | You install |
-|---|---|---|
-| MCP server config | Example only | OAuth in editor |
-| MCP tools (`use_figma`, etc.) | No | Via Figma MCP after OAuth |
-| Agent skills (`figma-use`, …) | **No** | [figma-console-mcp-skills](https://github.com/southleft/figma-console-mcp-skills) |
-
-**`use_figma`** = tool that runs Plugin API code. **`figma-use`** = skill that teaches correct usage — load it before every `use_figma` call.
-
-Full guide: **`docs/figma-mcp-and-skills.md`** (connection test, Design vs Dev Mode URLs).
-
----
-
-## Repo structure
-
-```
-config/figma.defaults.json
-config/figma.json            gitignored
-tokens/                      empty scaffolds
-tmp/figma-export/            local exports
-tmp/tokens/                  roundtrip validation
-scripts/
-AGENTS.md                    this file
-docs/setup.md                human setup guide
-```
-
----
-
 ## Config status
 
 | Status | Meaning |
@@ -156,4 +91,4 @@ npm run config -- --json
 
 ## Updating tooling
 
-See `UPDATING.md` (git fetch/merge from `upstream`).
+See **`UPDATING.md`**.

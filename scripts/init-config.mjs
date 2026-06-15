@@ -123,7 +123,7 @@ if (status === 'ok') {
 } else if (status === 'incomplete') {
   console.log('\n⚠️  Partial init — collections still needed');
   console.log(`    ${reason}`);
-  console.log('    Default: derived from tokens/ folders (see tokens/README.md)');
+  console.log('    Default: derived from tokens/ folders (see README.md)');
   console.log('    Or override: npm run init -- --merge --collections …');
 } else {
   console.log(`\n⚠️  Status: ${status}${reason ? ` — ${reason}` : ''}`);

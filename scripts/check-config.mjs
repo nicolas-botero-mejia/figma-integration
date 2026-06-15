@@ -50,7 +50,7 @@ switch (status) {
     console.log('');
     console.log('  npm run init -- --url "https://…"');
     console.log('');
-    console.log('Collections default from tokens/ scaffold. See docs/setup.md');
+    console.log('Collections default from tokens/ scaffold. See README.md');
     process.exit(1);
   case 'invalid':
     console.log(`❌  Invalid config — ${reason}`);

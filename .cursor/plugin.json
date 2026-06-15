@@ -1,0 +1,20 @@
+{
+  "name": "figma",
+  "displayName": "Figma",
+  "version": "2.2.50",
+  "description": "Figma MCP server and agent skills (required for variable extract/push in this repo). From https://github.com/figma/mcp-server-guide",
+  "author": {
+    "name": "Figma"
+  },
+  "homepage": "https://github.com/figma/mcp-server-guide",
+  "repository": "https://github.com/figma/mcp-server-guide",
+  "keywords": [
+    "figma",
+    "design",
+    "mcp",
+    "ui",
+    "code-connect"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

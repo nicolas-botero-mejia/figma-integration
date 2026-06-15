@@ -4,7 +4,8 @@ This repo is designed to be **cloned per design system**. Tooling and project da
 
 | Layer | Paths | Updated via |
 |---|---|---|
-| **Tooling** | `scripts/`, `config/figma.defaults.json`, `package.json`, docs | Pull from upstream |
+| **Tooling** | `scripts/`, `config/figma.defaults.json`, `package.json`, MCP/plugin manifests, docs | Pull from upstream |
+| **Environment** | Figma OAuth, Copilot CLI auth, southleft skills in `.github/skills/` or `.cursor/skills/` | Local — verify after every tooling update |
 | **Project** | `tokens/`, `config/figma.json`, `tmp/` | Your Figma file / local work |
 
 Read `VERSION` (or `package.json` version) to see which tooling release you have.
@@ -48,7 +49,7 @@ git fetch upstream
 git merge upstream/master
 ```
 
-If there are **no conflicts**, you're done. Run `npm run config` and spot-check any scripts you use often.
+If there are **no conflicts**, run the [After updating](#after-updating) checks — `npm run config` alone is not enough when scripts or MCP config changed.
 
 ### If there are conflicts
 
@@ -57,7 +58,7 @@ If there are **no conflicts**, you're done. Run `npm run config` and spot-check 
 | `scripts/` | **Upstream** (theirs) — unless you intentionally patched a script locally |
 | `config/figma.defaults.json` | **Upstream** — then re-run `npm run init -- --merge` if collections changed |
 | `package.json` | **Upstream** for `scripts` section; keep your repo metadata if this is a fork |
-| `README.md`, `AGENTS.md`, `docs/`, `UPDATING.md` | **Upstream** |
+| `README.md`, `AGENTS.md`, `UPDATING.md` | **Upstream** |
 | `tokens/` | **Yours** — populated from Figma; never overwrite with empty scaffolds |
 | `config/figma.json` | **Yours** — gitignored; merge won't touch it |
 | `tmp/` | **Yours** — gitignored |
@@ -86,10 +87,45 @@ git commit
 
 ## After updating
 
-1. Read `CHANGELOG.md` for breaking changes or new commands
-2. `npm run config` — config must still pass
-3. If `figma.defaults.json` changed, compare with your local `config/figma.json` and merge new fields if needed
-4. Re-run `npm test` if you have a Figma export and populated tokens
+Updates can change `scripts/`, MCP config (`.mcp.json`, `.github/mcp.json`, plugin manifests), or docs. **Your editor environment is not updated automatically** — verify the full stack in the editor you actually use.
+
+### 1. Read the changelog
+
+Read `CHANGELOG.md` for breaking changes or new commands.
+
+### 2. CLI sanity check
+
+```bash
+npm run config    # must still pass
+npm test          # if you have a Figma export and populated tokens/
+```
+
+If `figma.defaults.json` changed, compare with your local `config/figma.json` and merge new fields if needed (`npm run init -- --merge`).
+
+### 3. Verify MCP + plugin layer (your editor)
+
+If the merge touched **any** of these paths, re-check MCP in **your** environment (Cursor, GitHub Copilot app, or VS Code — they behave differently):
+
+- `.mcp.json`, `.github/mcp.json`, `.cursor/mcp.json`
+- `.github/plugin/`, `.cursor/plugin.json`
+- `config/mcp.example.json`
+
+| Check | How |
+|---|---|
+| Figma plugin still active | Plugin / MCP panel shows Figma connected |
+| OAuth still valid | Re-auth if needed — **Copilot app:** run `copilot` in terminal (may take several tries; OAuth window is timing-sensitive) |
+| `use_figma` tool listed | Without it, extract/push scripts cannot run |
+| Connection test | Run `scripts/mcp-connection-test.js` via `use_figma` — must return collections |
+
+### 4. Verify agent skills
+
+Skills are **local to your machine**, not in git. Upstream updates do not refresh them, but MCP/plugin changes can break skill loading.
+
+Confirm **`figma-use`** is still installed from [southleft/figma-console-mcp-skills](https://github.com/southleft/figma-console-mcp-skills) in `.github/skills/` or `.cursor/skills/`. Re-copy if missing.
+
+### 5. Multi-editor teams
+
+If your team uses **more than one editor**, each person should run steps 3–4 in **their** editor after an update. A passing `npm run config` in terminal does **not** prove MCP works in Copilot vs Cursor.
 
 ---
 
@@ -122,4 +158,6 @@ If an update breaks your workflow, open an issue on [figma-integration](https://
 
 - Your `VERSION`
 - The upstream commit or tag you merged
+- **Editor** (Cursor, Copilot app, VS Code)
+- Whether `npm run config` and the MCP connection test pass
 - Whether `tokens/` is populated

@@ -2,11 +2,11 @@
 //
 // Prerequisites:
 //   1. Figma MCP connected and OAuth complete in your editor
-//   2. figma-use skill loaded (where your host supports skills)
+//   2. figma-use skill installed (southleft/figma-console-mcp-skills) and loaded
 //   3. Target file open / fileKey set — use a Design-mode URL, not Dev Mode (?m=dev)
 //
 // Pass: returns ok:true with fileName and collection names.
-// Fail: auth errors, missing use_figma tool, or empty/wrong file → see docs/figma-mcp-and-skills.md
+// Fail: auth errors, missing use_figma tool, or empty/wrong file → see README.md § Connection test
 
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
 

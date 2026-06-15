@@ -10,13 +10,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Changed
 
-- Editor-agnostic docs: `AGENTS.md`, `docs/setup.md`, `.github/copilot-instructions.md`
-- CLI-first init (`npm run init`) — no Cursor-specific workflow
-- MCP examples for VS Code (`.vscode/mcp.json`) and generic (`config/mcp.example.json`)
-- Removed `CLAUDE.md` and Cursor-only plugin alias from defaults
-- Added `docs/figma-mcp-and-skills.md` — MCP vs skills vs `use_figma`, install steps, connection test, Design vs Dev Mode URLs
-- Added `scripts/mcp-connection-test.js` and Dev Mode warning in `parse-url`
-- Added `.cursor/skills/README.md` — skills install pointer (skills not bundled)
+- Consolidated setup into single **`README.md`**; removed `docs/setup.md`, `docs/figma-mcp-and-skills.md`, and scattered folder READMEs
+- Added official Figma plugin manifests (`.cursor/plugin.json`, `.github/plugin/`) and root **`.mcp.json`**
+- Enriched MCP config (`type: http`, tool titles) in `.github/mcp.json`, `.cursor/mcp.json`, `.vscode/mcp.json`
+- **`README.md`**: ordered setup (plugin → OAuth → southleft skills → init → connection test); Copilot CLI auth caveat
+- **`UPDATING.md`**: post-update verification for MCP, plugin, and skills in your editor environment
+- **`AGENTS.md`**: slim agent instructions; human setup deferred to README
+- CLI-first init; collections auto-derived from `tokens/` scaffold
+- Removed `.github/copilot-instructions.md` and `CLAUDE.md`
+- Added `scripts/mcp-connection-test.js`, Dev Mode URL warning in `parse-url`
 
 ## [1.0.0] - 2026-06-11
 
