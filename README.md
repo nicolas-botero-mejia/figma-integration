@@ -16,14 +16,15 @@ Do these steps **in sequence**. Later steps fail if earlier ones are skipped.
 
 ```
 □ 0. Clone + npm install
-□ 1. Install Figma MCP plugin (editor-specific — see below)
-□ 2. Authenticate Figma MCP (OAuth — includes Copilot CLI if using GitHub Copilot app)
-□ 3. Install agent skills from southleft/figma-console-mcp-skills (not bundled here)
-□ 4. Copy Figma URL from Design mode (not Dev Mode)
-□ 5. npm run parse-url → npm run init → npm run config
-□ 6. MCP connection test — use_figma + figma-use skill, collections returned
-□ 7. Extract variables → tmp/figma-export/ → npm test
+□ 1. npm run init:env (or npm run init -- --url "…") — MCP config + hard-install plugin + southleft skills
+□ 2. Activate Figma plugin in your editor + complete OAuth (Copilot app: `copilot` CLI)
+□ 3. npm run init -- --url "https://…" — project config (skipped if done in step 1 with --url)
+□ 4. npm run doctor — verify MCP files + skills on disk
+□ 5. MCP connection test — use_figma + figma-use, collections returned
+□ 6. Extract → npm run scaffold-components → merge tokens → npm test
 ```
+
+**`npm run init`** runs **environment setup first** (sync MCP from `.mcp.json`, clone Figma plugin skills + required southleft skills), then writes `config/figma.json` when `--url` is provided.
 
 ---
 
@@ -37,81 +38,42 @@ npm install
 
 ---
 
-## Step 1 — Install Figma MCP plugin
+## Step 1 — Environment (MCP + skills)
 
-Variable extract/push needs the official [Figma MCP plugin](https://github.com/figma/mcp-server-guide). This repo ships plugin manifests and MCP config; you still must **activate the plugin** in your editor.
+Hard-installs **both** skill sets (separate sources — always reinstalled, not optional):
 
-| Editor | How to install |
+| Source | Skills |
 |---|---|
-| **Cursor** | `/add-plugin figma` in agent chat (manifest: `.cursor/plugin.json`) |
-| **GitHub Copilot / VS Code** | Install from `.github/plugin/plugin.json` |
-| **Other** | Copy `config/mcp.example.json` into your editor's MCP settings |
+| [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide) | Figma plugin skills (`figma-use`, `figma-generate-design`, …) |
+| [southleft/figma-console-mcp-skills](https://github.com/southleft/figma-console-mcp-skills) | `figma-use`, `figma-export-tokens`, `figma-import-tokens`, `figma-manage-variables` |
 
-After install, confirm **`use_figma`** appears in your MCP tool list. Read-only tools alone (`get_design_context`, `get_metadata`, …) are **not** enough for this pipeline.
-
----
-
-## Step 2 — Authenticate Figma MCP
-
-Complete Figma OAuth so MCP server `https://mcp.figma.com/mcp` shows **connected / authenticated** in your editor.
-
-### GitHub Copilot app — Copilot CLI required
-
-The **GitHub Copilot desktop app** does **not** include **Copilot CLI**. Figma MCP OAuth for Copilot often **only works after CLI auth**:
-
-1. [Install GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli) if you don't have it.
-2. Open a terminal and run:
-
-   ```bash
-   copilot
-   ```
-
-3. Complete the browser sign-in / OAuth flow when prompted.
-4. **Retry if auth fails** — the OAuth window is timing-sensitive. Run `copilot` again and complete sign-in promptly if the first attempt doesn't stick.
-5. Return to your editor and confirm Figma MCP is connected.
-
-### All editors
-
-| Symptom | Fix |
-|---|---|
-| Auth / 401 / not connected | Re-run OAuth (`copilot` for Copilot app, or MCP settings in Cursor / VS Code) |
-| `use_figma` not in tool list | Re-check Step 1 — plugin not fully installed |
-
----
-
-## Step 3 — Install agent skills (required)
-
-**Skills are not bundled in this repo** and are **not optional** for reliable extract/push. The Figma plugin gives you MCP tools; the **southleft** skills teach the AI how to use them correctly.
-
-Install from [southleft/figma-console-mcp-skills](https://github.com/southleft/figma-console-mcp-skills):
+Southleft installs **after** plugin skills (same folder; token-pipeline `figma-use` wins if names overlap).
 
 ```bash
-git clone https://github.com/southleft/figma-console-mcp-skills.git /tmp/figma-skills
-cp -R /tmp/figma-skills/skills/figma-use .github/skills/figma-use
+npm run init:env                              # both editors (.github/skills + .cursor/skills)
+npm run init:env -- --editor copilot          # Copilot / VS Code only
+npm run init:env -- --editor cursor           # Cursor only
 ```
 
-| Editor | Copy skills to |
-|---|---|
-| **GitHub Copilot / VS Code** | `.github/skills/` |
-| **Cursor** | `.cursor/skills/` |
-
-**Minimum (required):** `figma-use` — load before **every** `use_figma` call.
-
-**Optional (token pipeline):** `figma-export-tokens`, `figma-import-tokens`, `figma-manage-variables` from the same repo.
-
-Without Step 3, `use_figma` calls often fail in hard-to-debug ways even when OAuth succeeds.
-
-### MCP vs skills vs tools
-
-| | What it is |
-|---|---|
-| **Figma MCP server** | Remote server at `https://mcp.figma.com/mcp` — OAuth in Step 2 |
-| **`use_figma`** | MCP **tool** — runs Plugin API JavaScript (export/push variables) |
-| **`figma-use`** | Agent **skill** from southleft — teaches correct `use_figma` scripts |
+Requires **network** (git clone). Verify with `npm run doctor`.
 
 ---
 
-## Step 4 — Initialize (CLI)
+## Step 2 — Figma plugin + OAuth
+
+Variable extract/push still requires **activating the plugin** in your editor and **OAuth** (not scripted by init).
+
+| Editor | Plugin | OAuth |
+|---|---|---|
+| **Cursor** | `/add-plugin figma` or `.cursor/plugin.json` | MCP settings |
+| **GitHub Copilot / VS Code** | `.github/plugin/plugin.json` | MCP settings |
+| **Copilot desktop app** | same | Run `copilot` in terminal (retry if timing fails) |
+
+Confirm **`use_figma`** appears in your MCP tool list after OAuth.
+
+---
+
+## Step 3 — Project config (Figma URL)
 
 ```bash
 npm run parse-url -- "https://www.figma.com/design/YOUR_KEY/your-file-name"
@@ -119,7 +81,15 @@ npm run init -- --url "https://www.figma.com/design/YOUR_KEY/your-file-name"
 npm run config          # must show ok
 ```
 
-**Design-mode URLs only** — copy in Design mode, not Dev Mode. Avoid `?m=dev`. `npm run parse-url` warns on Dev Mode links.
+Or combine env + config in one command:
+
+```bash
+npm run init -- --url "https://www.figma.com/design/YOUR_KEY/your-file-name" --editor copilot
+```
+
+Use `--skip-env` to update config only. Use `--env-only` for skills/MCP without touching `config/figma.json`.
+
+**Design-mode URLs only** — avoid `?m=dev`.
 
 **Collections** default from the `tokens/` folder scaffold:
 
@@ -168,9 +138,9 @@ npm run config -- --json
 
 ---
 
-## Step 5 — Connection test
+## Step 4 — Connection test
 
-Run only after **Steps 1–4** (plugin, OAuth, skills, init).
+Run after **Steps 1–3** (env, OAuth, project config).
 
 **A. Local config**
 
@@ -196,18 +166,19 @@ return {
 |---|---|
 | Auth / 401 | Step 2 — re-run OAuth (`copilot` for Copilot app) |
 | `use_figma` not found | Step 1 — install Figma plugin |
-| Script errors / timeouts | Step 3 — install `figma-use` skill |
+| Script errors / timeouts | Re-run `npm run init:env` — load southleft `figma-use` before `use_figma` |
 | Wrong / empty file | Design-mode URL; check `config/figma.json` fileKey |
 
 ---
 
-## Step 6 — Token pipeline
+## Step 5 — Token pipeline
 
 1. Export variables from Figma via MCP → `tmp/figma-export/chunks/master/`
 2. `node scripts/assemble-figma-export.mjs master tmp/figma-export/master-vars.json`
 3. `node scripts/figma-export-to-dtcg.mjs` → merge `tmp/tokens/` into `tokens/`
-4. Copy CSS-only tokens from `tmp/css-only-tokens/` when ready (shadows, easing, semantic typography — not Figma Variables)
-5. `npm test`
+4. `npm run scaffold-components` — one `tokens/components/{prefix}.json` per Figma group (`*` prefixes ignored)
+5. Copy CSS-only tokens from `tmp/css-only-tokens/` when ready
+6. `npm test`
 
 | Direction | Tooling |
 |---|---|
@@ -222,10 +193,12 @@ return {
 ## Commands
 
 ```bash
-npm run config          # config status
-npm run parse-url -- "https://www.figma.com/design/…"
+npm run config
+npm run init:env
 npm run init -- --url "https://…"
-npm test                # after Figma export + populated tokens/
+npm run doctor
+npm run scaffold-components
+npm test
 ```
 
 ---
@@ -238,7 +211,12 @@ config/
   figma.json               generated at init (gitignored)
   mcp.example.json         MCP config for other editors
 
-tokens/                    empty DTCG scaffolds → populated from Figma
+tokens/
+  primitives/ …            topic JSON files
+  semantic/ …
+  components/              one JSON per Figma component group (from scaffold-components)
+  density/ …
+  layout/ …
 tmp/                       local only (gitignored)
   figma-export/            flat export + per-collection chunks
   tokens/                  roundtrip validation output
@@ -263,7 +241,10 @@ UPDATING.md                pull tooling updates from upstream
 | Script | Purpose |
 |---|---|
 | `check-config.mjs` | Config status (`npm run config`) |
-| `init-config.mjs` | Write `config/figma.json` (`npm run init`) |
+| `init-config.mjs` | Env + project init (`npm run init`) |
+| `init-env.mjs` | MCP sync + hard-install skills (`npm run init:env`) |
+| `doctor.mjs` | Verify MCP files + skills (`npm run doctor`) |
+| `scaffold-components.mjs` | `tokens/components/{prefix}.json` from export |
 | `parse-figma-url.mjs` | Parse Figma URL → fileKey (`npm run parse-url`) |
 | `assemble-figma-export.mjs` | Per-collection chunks → single export JSON |
 | `figma-export-to-dtcg.mjs` | `master-vars.json` → `tmp/tokens/` |

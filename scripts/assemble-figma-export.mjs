@@ -8,10 +8,9 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { loadConfig } from './lib/load-config.mjs';
+import { ROOT } from './lib/root.mjs';
 
 const config = loadConfig();
-
-const ROOT = new URL('..', import.meta.url).pathname;
 const label = process.argv[2];
 const outRel = process.argv[3];
 if (!label || !outRel) {

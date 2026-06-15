@@ -39,11 +39,11 @@ npm run init -- --merge --collections CollectionA CollectionB
 
 ## Figma MCP (extract/push only)
 
-Required for variable extract/push — not for CLI-only init when collection names are known. Setup order in **`README.md`**:
+Required for variable extract/push — not for CLI-only init when collection names are known.
 
-1. Figma MCP plugin installed
-2. OAuth authenticated (Copilot app: **`copilot`** CLI — see README)
-3. **`figma-use`** skill installed from [southleft/figma-console-mcp-skills](https://github.com/southleft/figma-console-mcp-skills) — load before every **`use_figma`** call
+1. `npm run init:env` or `npm run init -- --url "…"` — MCP config + hard-install plugin + southleft skills (see **`README.md`**)
+2. Activate Figma plugin + OAuth in editor (Copilot app: **`copilot`** CLI)
+3. Load **`figma-use`** (southleft) before every **`use_figma`** call
 4. Run **`scripts/mcp-connection-test.js`** via `use_figma` before first extract
 
 Use **Design-mode** URLs only (not `?m=dev`).

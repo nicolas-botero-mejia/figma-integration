@@ -16,10 +16,10 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { loadConfig } from './lib/load-config.mjs';
+import { ROOT } from './lib/root.mjs';
+import { routeComponentVariable, isIgnoredComponentPrefix } from './lib/component-routing.mjs';
 
 loadConfig();
-
-const ROOT = new URL('..', import.meta.url).pathname;
 
 function parseArgs(argv) {
   const opts = {
@@ -54,36 +54,6 @@ const ROUTES = {
     border: 'semantic/border.json',
     transition: 'semantic/motion.json',
     animation: 'semantic/motion.json',
-  },
-  Components: {
-    button: 'components/button.json',
-    input: 'components/input.json',
-    table: 'components/data.json',
-    chart: 'components/data.json',
-    badge: 'components/feedback.json',
-    tag: 'components/feedback.json',
-    alert: 'components/feedback.json',
-    notification: 'components/feedback.json',
-    progress: 'components/feedback.json',
-    spinner: 'components/feedback.json',
-    label: 'components/forms.json',
-    helptext: 'components/forms.json',
-    checkbox: 'components/forms.json',
-    radio: 'components/forms.json',
-    toggle: 'components/forms.json',
-    select: 'components/forms.json',
-    form: 'components/forms.json',
-    card: 'components/layout.json',
-    modal: 'components/layout.json',
-    divider: 'components/layout.json',
-    accordion: 'components/layout.json',
-    tabs: 'components/navigation.json',
-    breadcrumb: 'components/navigation.json',
-    pagination: 'components/navigation.json',
-    link: 'components/navigation.json',
-    tooltip: 'components/overlays.json',
-    popover: 'components/overlays.json',
-    avatar: 'components/overlays.json',
   },
   Density: {
     density: 'density/spacing.json',
@@ -145,7 +115,11 @@ function varToDtcgToken(v) {
 }
 
 function routeVariable(collection, name) {
+  if (collection === 'Components') {
+    return routeComponentVariable(name);
+  }
   const prefix = name.split('/')[0];
+  if (isIgnoredComponentPrefix(prefix)) return null;
   const routes = ROUTES[collection];
   if (!routes) return null;
   return routes[prefix] || null;

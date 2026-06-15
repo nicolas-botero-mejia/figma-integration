@@ -10,15 +10,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Changed
 
-- Consolidated setup into single **`README.md`**; removed `docs/setup.md`, `docs/figma-mcp-and-skills.md`, and scattered folder READMEs
-- Added official Figma plugin manifests (`.cursor/plugin.json`, `.github/plugin/`) and root **`.mcp.json`**
-- Enriched MCP config (`type: http`, tool titles) in `.github/mcp.json`, `.cursor/mcp.json`, `.vscode/mcp.json`
-- **`README.md`**: ordered setup (plugin → OAuth → southleft skills → init → connection test); Copilot CLI auth caveat
-- **`UPDATING.md`**: post-update verification for MCP, plugin, and skills in your editor environment
-- **`AGENTS.md`**: slim agent instructions; human setup deferred to README
-- CLI-first init; collections auto-derived from `tokens/` scaffold
-- Removed `.github/copilot-instructions.md` and `CLAUDE.md`
-- Added `scripts/mcp-connection-test.js`, Dev Mode URL warning in `parse-url`
+- **`npm run init`** now wires MCP + hard-installs Figma plugin skills and required southleft skills before project config
+- Added **`npm run init:env`**, **`npm run doctor`**, **`npm run scaffold-components`**
+- Components routing: one JSON per Figma group (`components/{prefix}.json`); ignore `*` prefixes
+- Fixed Windows/OneDrive ROOT path in assemble, export, parity, compare scripts
+- Consolidated setup into single **`README.md`**; removed scattered docs and folder READMEs
+- Added Figma plugin manifests and enriched MCP config
+- **`UPDATING.md`**: post-update MCP/skills verification
 
 ## [1.0.0] - 2026-06-11
 

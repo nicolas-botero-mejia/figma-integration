@@ -20,10 +20,9 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'fs';
 import { join, relative } from 'path';
 import { loadConfig } from './lib/load-config.mjs';
+import { ROOT } from './lib/root.mjs';
 
 loadConfig();
-
-const ROOT = new URL('..', import.meta.url).pathname;
 const TOKENS_DIR = join(ROOT, 'tokens');
 const FIGMA_EXPORT = process.env.FIGMA_EXPORT
   ? (process.env.FIGMA_EXPORT.startsWith('/')
